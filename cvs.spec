@@ -6,7 +6,7 @@
 Summary: A version control system
 Name: cvs
 Version: 1.11.23
-Release: 11%{?dist}
+Release: 11%{?dist}.1
 License: GPL+ and GPLv2+ and LGPL+
 Group: Development/Tools
 Source0: ftp://ftp.gnu.org/non-gnu/cvs/source/stable/%{version}/cvs-%{version}.tar.bz2
@@ -48,6 +48,8 @@ Patch19: cvs-1.11.23-getline64.patch
 Patch20: cvs-1.11.22-stdinargs.patch
 # Bug #530097
 Patch21: cvs-1.11.23-sanity.patch
+# CVE-2010-3864, bug #644813
+Patch22: cvs-1.11.23-cve-2010-3846.patch
 
 
 %description
@@ -91,6 +93,7 @@ release.
 %patch19 -p1 -b getline64
 %patch20 -p1 -b .stdinargs
 %patch21 -p1 -b .sanity
+%patch22 -p1 -b .cve-2010-3846
 
 # Apply a patch to the generated files, OR
 # run autoreconf and require autoconf >= 2.58, automake >= 1.7.9
@@ -171,6 +174,9 @@ fi
 %config(noreplace) %{_sysconfdir}/profile.d/*
 
 %changelog
+* Wed Oct 20 2010 Petr Pisar <ppisar@redhat.com> - 1.11.23-11.el6_0.1
+- Fix CVE-2010-3846 (Resolves: #644813)
+
 * Wed Apr 21 2010 Petr Pisar <ppisar@redhat.com> 1.11.23-11
 - Fix sanity check test suite (getopt quotation and file mode listing) as per
   bug #530097
